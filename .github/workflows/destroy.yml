@@ -1,6 +1,8 @@
 name: DESTROY AWS CloudFormation with differents stacks
 
 on:
+  push:
+    branches: [master]
   workflow_dispatch:
 
 jobs:
@@ -8,27 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: MinTic Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v2
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1
+      - name: MinTic Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
 
-    - name: Delete ASG Stack
-      run: aws cloudformation delete-stack --stack-name MinticASGStack
+      - name: Delete ASG Stack
+        run: aws cloudformation delete-stack --stack-name MinticASGStack
 
-    - name: Delete ALB Stack
-      run: aws cloudformation delete-stack --stack-name MinticALBStack
+      - name: Delete ALB Stack
+        run: aws cloudformation delete-stack --stack-name MinticALBStack
 
-    - name: Delete EC2 Stack
-      run: aws cloudformation delete-stack --stack-name MinticEC2Stack
+      - name: Delete EC2 Stack
+        run: aws cloudformation delete-stack --stack-name MinticEC2Stack
 
-    - name: Delete Security Stack
-      run: aws cloudformation delete-stack --stack-name MinticSecurityStack
+      - name: Delete Security Stack
+        run: aws cloudformation delete-stack --stack-name MinticSecurityStack
 
-    - name: Delete VPC Stack
-      run: aws cloudformation delete-stack --stack-name MinticVPCStack
-
-
-     
+      - name: Delete VPC Stack
+        run: aws cloudformation delete-stack --stack-name MinticVPCStack
