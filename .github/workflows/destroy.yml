@@ -1,4 +1,4 @@
-name: MinTic Deploy to AWS CloudFormation with differents stacks
+name: DESTROY AWS CloudFormation with differents stacks
 
 on:
   workflow_dispatch:
@@ -6,7 +6,6 @@ on:
 jobs:
   destroy:
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch'  
 
     steps:
     - name: MinTic Configure AWS credentials
