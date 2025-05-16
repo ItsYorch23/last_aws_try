@@ -35,8 +35,7 @@ jobs:
     - name: Deploy ASG
       run: aws cloudformation deploy --template-file templates/asg.yml --stack-name MinticASGStack
 
-jobs:
-   destroy:
+  destroy:
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch'  
 
