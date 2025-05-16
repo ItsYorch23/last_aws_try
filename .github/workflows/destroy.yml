@@ -1,0 +1,35 @@
+name: MinTic Deploy to AWS CloudFormation with differents stacks
+
+on:
+  workflow_dispatch:
+
+jobs:
+  destroy:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'  
+
+    steps:
+    - name: MinTic Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Delete ASG Stack
+      run: aws cloudformation delete-stack --stack-name MinticASGStack
+
+    - name: Delete ALB Stack
+      run: aws cloudformation delete-stack --stack-name MinticALBStack
+
+    - name: Delete EC2 Stack
+      run: aws cloudformation delete-stack --stack-name MinticEC2Stack
+
+    - name: Delete Security Stack
+      run: aws cloudformation delete-stack --stack-name MinticSecurityStack
+
+    - name: Delete VPC Stack
+      run: aws cloudformation delete-stack --stack-name MinticVPCStack
+
+
+     
