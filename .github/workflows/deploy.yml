@@ -35,7 +35,8 @@ jobs:
     - name: Deploy ASG
       run: aws cloudformation deploy --template-file templates/asg.yml --stack-name MinticASGStack
 
-      destroy:
+jobs:
+   destroy:
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch'  
 
@@ -61,3 +62,6 @@ jobs:
 
     - name: Delete VPC Stack
       run: aws cloudformation delete-stack --stack-name MinticVPCStack
+
+
+     
