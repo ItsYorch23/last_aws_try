@@ -1,8 +1,6 @@
 name: DESTROY AWS CloudFormation with differents stacks
 
 on:
-  push:
-    branches: [master]
   workflow_dispatch:
 
 jobs:
@@ -24,10 +22,4 @@ jobs:
         run: aws cloudformation delete-stack --stack-name MinticALBStack
 
       - name: Delete EC2 Stack
-        run: aws cloudformation delete-stack --stack-name MinticEC2Stack
-
-      - name: Delete Security Stack
-        run: aws cloudformation delete-stack --stack-name MinticSecurityStack
-
-      - name: Delete VPC Stack
-        run: aws cloudformation delete-stack --stack-name MinticVPCStack
+        run: aws cloudformation delete-stack --stack-name
